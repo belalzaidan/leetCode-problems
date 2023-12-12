@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.HashMap;
 
 class Solution {
 
@@ -100,12 +101,77 @@ class Solution {
         return true;
     }
 
+    public static boolean isHappy(int n) {      //Still not solved
+        String numStr = Integer.toString(n);
+        int sum = 0;
+        for (int i = 0; i < numStr.length(); i++) {
+            int digit = Character.getNumericValue(numStr.charAt(i));
+            sum += Math.pow(digit, 2);
+        }
+        if (sum == 1){
+            return true;
+        } else {
+            return isHappy(sum);
+        }
+    }
+
+    public static boolean isIsomorphic(String s, String t) {
+            HashMap<Character, Character> s_to_t = new HashMap<>();
+            HashMap<Character, Character> t_to_s = new HashMap<>();
+
+            for (int i = 0; i < s.length(); i++){
+                char sChar = s.charAt(i);
+                char tChar = t.charAt(i);
+
+                if (s_to_t.containsKey(sChar)){
+                    if (!(s_to_t.get(sChar) == tChar)) {return false;}
+                }
+                else s_to_t.put(sChar, tChar);
+
+                if (t_to_s.containsKey(tChar)){
+                    if (!(t_to_s.get(tChar) == sChar)) {return false;}
+                }
+                else t_to_s.put(tChar, sChar);
+            }
+
+            return true;
+
+
+            //alternative answer, less efficent
+//        String [] listOfStrings = new String[s.length()];
+//
+//        for (int i = 0; i < s.length(); i++){
+//            String str = "";
+//            str += String.valueOf(s.charAt(i))
+//                    + String.valueOf(t.charAt(i));
+//            listOfStrings[i] = str;
+//        }
+//        for (String listOfString : listOfStrings) {
+//            for (int j = 1; j < listOfStrings.length; j++) {
+//                boolean firstLettersMatch = listOfString.charAt(0) == listOfStrings[j].charAt(0);
+//                boolean secondLettersMatch = listOfString.charAt(1) == listOfStrings[j].charAt(1);
+//                if (firstLettersMatch){
+//                    if (!secondLettersMatch) return false;
+//                }
+//                else if (secondLettersMatch){
+//                    if (!(firstLettersMatch)) return false;
+//
+//                }
+//            }
+//        }
+//        return true;
+        }
+
 }
 
 public class Main {
     public static void main(String[] args) {
 
+//        ** are the strings isomorphics?
+//        System.out.println(Solution.isIsomorphic("add","egg"));
 
+//        ** Is the number happy?
+//        System.out.println(Solution.isHappy(1111111));
 
 //        ** Check Student Absense Record
 //        System.out.println(Solution.checkRecord("AAAA"));
