@@ -162,11 +162,52 @@ class Solution {
 //        return true;
         }
 
+
+    public static int chalkReplacer(int[] chalk, long k) {
+        long totalChalks = 0;
+        for (int j : chalk) {
+            totalChalks += j;
+        }
+        k %=  totalChalks; // all steps so far are to skip the repeating, what we
+        // care about is the last part that's not enough chalks for everyone and
+        // are trying to find the one who is replacing.
+
+        int i = 0;
+        while(k >= chalk[i]){
+            k -= chalk[i];
+            i++;
+            if(i == chalk.length) i = 0;
+        }
+        return i;
+
+//        // Another way where the code reloop if we still have enough chalks
+//        // Less efficent
+//        int i = 0;
+//        while (true){
+//            if(k < chalk[i]) return i;
+//            else{
+//                while(k >= chalk[i]){
+//                    k -= chalk[i];
+//                    i++;
+//                    if(i == chalk.length) {
+//                        i = 0;
+//                    }
+//                }
+//            }
+//        }
+    }
+
+
 }
 
 public class Main {
     public static void main(String[] args) {
 
+//        ** Chalk Replacing
+//        int [] chalk = {5,1,5};
+//        int [] chelk = {3,4,1,2};
+//        System.out.println(Solution.chalkReplacer(chalk, 22)); // Expected: 0
+//        System.out.println(Solution.chalkReplacer(chelk, 25)); // Expexted: 1
 //        ** are the strings isomorphics?
 //        System.out.println(Solution.isIsomorphic("add","egg"));
 
